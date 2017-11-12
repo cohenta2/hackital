@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Subreddit Rating</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <style>
+        .hiddenRow {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        .main {
+            padding-top: 10px;
+        }
+    </style>
+</head>
+
+<body id="root">
+    <nav class="navbar navbar-dark bg-primary justify-content-between">
+        <a class="navbar-brand text-white" onclick="clearSearch()">Subreddit Ratings</a>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search" onkeyup="searchSubs()">
+        </form>
+    </nav>
+    <div class="container main">
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table rounded-top" style="border-collapse:collapse;" id="main-table">
+                    <thead class="rounded-top">
+                        <tr class="row alert-primary rounded-top">
+                            <th scope="col" class="col-sm-1">#</th>
+                            <th scope="col" class="col-sm-5">Subreddit</th>
+                            <th scope="col" class="col-sm-3">Subscribers</th>
+                            <th scope="col" class="col-sm-3">Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        {% for subreddit in subreddits %}
+                        <tr data-toggle="collapse" data-target="#demo{{ loop.index }}" class="accordion-toggle row">
+                            <th scope="row" class="col-sm-1">{{ loop.index }}</th>
+                            <td class="col-sm-5">
+                                <a href="https://www.reddit.com/{{ subreddit['name'] }}">{{ subreddit['name'] }}</a>
+                            </td>
+                            <td class="col-sm-3">{{ subreddit['subs'] }}</td>
+                            <td class="col-sm-3">
+                                <i class="material-icons">grade</i>
+                                <i class="material-icons">grade</i>
+                                <i class="material-icons">grade</i>
+                                <i class="material-icons">grade</i>
+                                <i class="material-icons">grade</i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="hiddenRow border-0 row">
+                                <div class="accordian-body collapse container-fluid alert-secondary" id="demo{{ loop.index }}">
+                                    <div class="row">
+                                        <div class="desc col-sm-6">
+                                            <p>{{ subreddit['desc'] }}</p>
+                                        </div>
+                                        <div class="reddit-widget col-sm-6">
+                                            <h6>
+                                                <u>Recent Posts</u>
+                                            </h6>
+                                            <script src="https://www.reddit.com/{{ subreddit['name'] }}.embed?limit=2" type="text/javascript"></script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function searchSubs() {
+            // Declare variables 
+            var input, filter, tbody, tr, td, i;
+            input = document.getElementById("search");
+            filter = input.value.toUpperCase();
+            tbody = document.getElementById("table-body");
+            tr = tbody.getElementsByTagName("tr");
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("a")[0];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function clearSearch() {
+            var search = document.getElementById("search");
+            search.value = "";
+            searchSubs();
+        }
+    </script>
+</body>
+
+</html>
