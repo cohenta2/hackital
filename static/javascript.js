@@ -1,10 +1,10 @@
 function searchSubs() {
-    // Declare variables 
+    // Declare variables
     var input, filter, tbody, tr, td, i;
     input = document.getElementById("search");
     filter = input.value.toUpperCase();
     tr = document.getElementsByClassName("accordion-toggle");
-    
+
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
         subredditName = tr[i].getAttribute('id');
@@ -28,6 +28,7 @@ function clearSearch() {
         collapsables[i].collapse('hide');
     }
 }
+<<<<<<< HEAD
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     var test = [];
