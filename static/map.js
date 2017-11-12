@@ -33,7 +33,8 @@ function mover(d) {
 		.style("fill-opacity", 0.3);
     var coordinates = el[0][0].__data__.toString();
     sub = graph_dict.get(coordinates);
-    $("#tooltip").text(sub['name']);
+    $("#name").text(sub['name']);
+    $("#score").text(sub['subs'])
     // console.log(graph_dict.get(coordinates));
 }
 

@@ -44,15 +44,12 @@
 		</style>
   {% endblock %}
   {%block content %}
-    <div class="header">
-    Self Organizing Maps
-    <div class="hint">Heatmaps showing distributions per variable</div>
-    </div>
   <div id="chart"></div>
   <div class="container main">
-    <div class="page-header" id="tooltip">
-      <h1>DATA!</h1>
-    </div>
+
+      <h1 id="name">NAME!</h1>
+      <h2 id="score">SCORE</h2>
+
   </div>
   <script type="text/javascript" src="{{ url_for('static', filename='map.js')}}"></script>
   <script>
