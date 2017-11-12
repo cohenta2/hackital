@@ -22,9 +22,6 @@ application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 def index():
     return render_template('index.html', subreddits = top100_subreddits, active="index")
 
-@application.route('/my-subreddits/')
-def mySubReddits():
-    return render_template('my-subreddits.html', subreddits = top100_subreddits, active_table="mysubs")
 
 @application.route('/map/')
 def build_map():

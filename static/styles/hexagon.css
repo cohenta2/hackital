@@ -8,6 +8,16 @@
   border-right: solid 5px #333333;
 }
 
+.hexagon-offset {
+  position: relative;
+  width: 120px;
+  height: 69.28px;
+  background-color: #53fb35;
+  margin: 34.64px 60px;
+  border-left: solid 5px #333333;
+  border-right: solid 5px #333333;
+}
+
 .hexagon:before,
 .hexagon:after {
   content: "";
