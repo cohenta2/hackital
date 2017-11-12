@@ -1,7 +1,18 @@
 from flask import Flask
-
+import pandas as pd
+import boto3
 # print a nice greeting.
 def say_hello(username = "World"):
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('')
+    with open('test.txt') as inputfile:
+        column_list = ['author', 'subreddit', 'selftext', 'created_utc', 'score']
+        df = pd.read_json(inputfile, lines=True)
+        df = df[column_list].to_json()
+        table.put_item(df)
+    #     for line in inputfile:
+    #         print(line)
     return '<p>Hello %s!</p>\n' % username
 
 # some bits of text for the page.
