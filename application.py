@@ -12,11 +12,11 @@ for x in subreddits_json['data']['children']:
     subreddit['subs'] = keys['subscribers']
     subreddit['desc'] = keys['public_description']
     top100_subreddits.append(subreddit)
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('index.html', subreddits = top100_subreddits, random="test")
 
 if __name__ == '__main__':
-   app.run(debug = True)
+   application.run(debug = True)
