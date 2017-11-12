@@ -1,34 +1,22 @@
-from flask import Flask
+from flask import Flask, render_template
+from urllib import request
+import json
 
-# print a nice greeting.
-def say_hello(username = "World"):
-    return '<p>Hello %s!</p>\n' % username
+response = request.urlopen("https://api.reddit.com/subreddits/popular/?limit=100")
+subreddits_json = json.loads(response.read().decode())
+top100_subreddits= []
+for x in subreddits_json['data']['children']:
+    keys = x['data']
+    subreddit = {}
+    subreddit['name'] = keys['display_name_prefixed']
+    subreddit['subs'] = keys['subscribers']
+    subreddit['desc'] = keys['public_description']
+    top100_subreddits.append(subreddit)
+app = Flask(__name__)
 
-# some bits of text for the page.
-header_text = '''
-    <html>\n<head> <title>EB Flask Test</title> </head>\n<body>'''
-instructions = '''
-    <p><em>Hint</em>: This is a RESTful web service! Append a username
-    to the URL (for example: <code>/Thelonious</code>) to say hello to
-    someone specific.</p>\n'''
-home_link = '<p><a href="/">Back</a></p>\n'
-footer_text = '</body>\n</html>'
+@app.route('/')
+def index():
+    return render_template('index.html', subreddits = top100_subreddits, random="test")
 
-# EB looks for an 'application' callable by default.
-application = Flask(__name__)
-
-# add a rule for the index page.
-application.add_url_rule('/', 'index', (lambda: header_text +
-    say_hello() + instructions + footer_text))
-
-# add a rule when the page is accessed with a name appended to the site
-# URL.
-application.add_url_rule('/<username>', 'hello', (lambda username:
-    header_text + say_hello(username) + home_link + footer_text))
-
-# run the app.
-if __name__ == "__main__":
-    # Setting debug to True enables debug output. This line should be
-    # removed before deploying a production app.
-    application.debug = True
-    application.run()
+if __name__ == '__main__':
+   app.run(debug = True)
