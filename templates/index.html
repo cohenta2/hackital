@@ -1,73 +1,59 @@
-{% extends "base.html" %}
-{% block title %}Index{% endblock %}
-{% block head %}
-  {{ super() }}
-
-  {% endblock %}
-{% block content %}
-<div class="container main">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active bg-primary" href="{{ url_for('index') }}">Top 100</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('mySubReddits') }}">My Subreddits</a>
-        </li>
-    </ul>
-    <table class="table" style="border-collapse:collapse; height: 100px;" id="main-table">
-        <thead class="text-white">
-            <tr class="bg-primary">
-                <th scope="col">#</th>
-                <th></th>
-                <th scope="col">
-                    Subreddit
-                </th>
-                <th scope="col">Subscribers</th>
-                <th scope="col">Rating</th>
-            </tr>
-        </thead>
-        <tbody id="table-body">
-            {% for subreddit in subreddits %}
-            <tr id="{{ subreddit['name'] }}" data-toggle="collapse" data-target="#demo{{ loop.index }}" class="accordion-toggle align-middle"
-                onclick="makeShadow()">
-                <td scope="row" class="col-xs-3">{{ loop.index }}</td>
-                <td>
-                    <img src="{{ subreddit['img'] }}" class="rounded-circle" height="50">
-                </td>
-                <td class="col-xs-3">
-                    <a href="https://www.reddit.com/{{ subreddit['name'] }}">{{ subreddit['name'] }}</a>
-                </td>
-                <td>{{ subreddit['subs'] }}</td>
-                <td>
-                    <i class="material-icons">grade</i>
-                    <i class="material-icons">grade</i>
-                    <i class="material-icons">grade</i>
-                    <i class="material-icons">grade</i>
-                    <i class="material-icons">grade</i>
-                </td>
-            </tr>
-            <tr id="{{ subreddit['name'] }}-secondary" class="border-0">
-                <td colspan="5" class="hiddenRow">
-                    <div class="accordian-body collapse container alert-secondary rounded-bottom border border-secondary border-top-0" id="demo{{ loop.index }}">
-                        <div class="row">
-                            <div class="desc col-sm-6">
-                                <h6>
-                                    <u>Description</u>
-                                </h6>
-                                <p>{{ subreddit['desc'] }}</p>
-                            </div>
-                            <div class="reddit-widget col-sm-6">
-                                <h6>
-                                    <u>Recent Posts</u>
-                                </h6>
-                                <script src="https://www.reddit.com/{{ subreddit['name'] }}.embed?limit=2" type="text/javascript"></script>
+{% extends "base.html" %} {% set title="Subreddit Ratings" %} {% block head %} {{ super() }} {% endblock %} {% block content %}
+    <div class="container main">
+        <table class="table border-0" style="border-collapse:collapse; height: 100px;" id="main-table">
+            <thead class="text-white border-0">
+                <tr class="bg-primary">
+                    <th scope="col"><a href="#" onclick="sortNum(0)" class="text-white">#</a></th>
+                    <th></th>
+                    <th scope="col">
+                        <a href="#" onclick="sortSubreddits()" class="text-white">Subreddit</a>
+                    </th>
+                    <th scope="col"><a href="#" onclick="sortNum(3)" class="text-white">Subscribers</a></th>
+                    <th scope="col">Rating</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                {% for subreddit in subreddits %}
+                <tr id="{{ subreddit['name'] }}" data-toggle="collapse" data-target="#demo{{ loop.index }}" class="accordion-toggle align-middle"
+                    onclick="makeShadow()">
+                    <td scope="row" class="col-xs-3">{{ loop.index }}</td>
+                    <td>
+                        <img src="{{ subreddit['img'] }}" class="rounded-circle" height="50">
+                    </td>
+                    <td class="col-xs-3">
+                        <a href="https://www.reddit.com/{{ subreddit['name'] }}">{{ subreddit['name'] }}</a>
+                    </td>
+                    <td>{{ subreddit['subs'] }}</td>
+                    <td>
+                        <i class="material-icons">grade</i>
+                        <i class="material-icons">grade</i>
+                        <i class="material-icons">grade</i>
+                        <i class="material-icons">grade</i>
+                        <i class="material-icons">grade</i>
+                    </td>
+                </tr>
+                <tr id="{{ subreddit['name'] }}-secondary" class="border-0">
+                    <td colspan="5" class="hiddenRow">
+                        <div class="accordian-body collapse container alert-secondary rounded-bottom border border-secondary border-top-0" id="demo{{ loop.index }}">
+                            <div class="row">
+                                <div class="desc col-sm-6">
+                                    <h6>
+                                        <u>Description</u>
+                                    </h6>
+                                    <p>{{ subreddit['desc'] }}</p>
+                                </div>
+                                <div class="reddit-widget col-sm-6">
+                                    <h6>
+                                        <u>Recent Posts</u>
+                                    </h6>
+                                    <script src="https://www.reddit.com/{{ subreddit['name'] }}.embed?limit=2" type="text/javascript"></script>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
