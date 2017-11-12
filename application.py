@@ -17,8 +17,6 @@ for x in subreddits_json['data']['children']:
     top100_subreddits.append(subreddit)
 application = Flask(__name__)
 application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-<<<<<<< HEAD
-
 
 @application.route('/')
 def index():
