@@ -1,32 +1,3 @@
-
-<!--     <style>
-        .hiddenRow {
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-        }
-
-        .main {
-            padding-top: 10px;
-        }
-
-        table {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        }
-
-        .reddit-widget,
-        .desc {
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
-    </style> -->
-<body id="root" class="bg-light">
-    <nav class="navbar navbar-dark bg-primary justify-content-between">
-        <a id="title" class="navbar-brand text-white" onclick="clearSearch()">Subreddit Ratings</a>
-        <form class="form-inline" onsubmit="return false">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search by Name" aria-label="Search" id="search" onkeyup="searchSubs()">
-        </form>
-    </nav>
-  
 {% extends "base.html" %}
   {% block title %} Map {% endblock %}
   {% block head %}
@@ -34,75 +5,57 @@
   {% endblock %}
   {%block content %}
     <div class="container main">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active bg-primary" href="{{ url_for('index') }}">Top 100</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('mySubReddits') }}">My Subreddits</a>
-            </li>
-        </ul>
-        <table class="table" style="border-collapse:collapse; height: 100px;" id="main-table">
-            <thead class="text-white">
-                <tr class="bg-primary">
-                    <th scope="col">#</th>
-                    <th></th>
-                    <th scope="col">
-                        Subreddit
-                    </th>
-                    <th scope="col">Subscribers</th>
-                    <th scope="col">Rating</th>
-                </tr>
-            </thead>
-            <tbody id="table-body">
-                {% for subreddit in subreddits %}
-                <tr id="{{ subreddit['name'] }}" data-toggle="collapse" data-target="#demo{{ loop.index }}" class="accordion-toggle align-middle"
-                    onclick="makeShadow()">
-                    <td scope="row" class="col-xs-3">{{ loop.index }}</td>
-                    <td>
-                        <img src="{{ subreddit['img'] }}" class="rounded-circle" height="50">
-                    </td>
-                    <td class="col-xs-3">
-                        <a href="https://www.reddit.com/{{ subreddit['name'] }}">{{ subreddit['name'] }}</a>
-                    </td>
-                    <td>{{ subreddit['subs'] }}</td>
-                    <td>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
-                    </td>
-                </tr>
-                <tr id="{{ subreddit['name'] }}-secondary" class="border-0">
-                    <td colspan="5" class="hiddenRow">
-                        <div class="accordian-body collapse container alert-secondary rounded-bottom border border-secondary border-top-0" id="demo{{ loop.index }}">
-                            <div class="row">
-                                <div class="desc col-sm-6">
-                                    <h6>
-                                        <u>Description</u>
-                                    </h6>
-                                    <p>{{ subreddit['desc'] }}</p>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table rounded-top" style="border-collapse:collapse;" id="main-table">
+                    <thead class="rounded-top">
+                        <tr class="row alert-primary rounded-top">
+                            <th scope="col" class="col-sm-1">#</th>
+                            <th scope="col" class="col-sm-5">Subreddit</th>
+                            <th scope="col" class="col-sm-3">Subscribers</th>
+                            <th scope="col" class="col-sm-3">Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        {% for subreddit in subreddits %}
+                        <tr data-toggle="collapse" data-target="#demo{{ loop.index }}" class="accordion-toggle row">
+                            <th scope="row" class="col-sm-1">{{ loop.index }}</th>
+                            <td class="col-sm-5">
+                                <a href="https://www.reddit.com/{{ subreddit['name'] }}">{{ subreddit['name'] }}</a>
+                            </td>
+                            <td class="col-sm-3">{{ subreddit['subs'] }}</td>
+                            <td class="col-sm-3">
+                                <i class="material-icons">grade</i>
+                                <i class="material-icons">grade</i>
+                                <i class="material-icons">grade</i>
+                                <i class="material-icons">grade</i>
+                                <i class="material-icons">grade</i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="hiddenRow border-0 row">
+                                <div class="accordian-body collapse container-fluid alert-secondary" id="demo{{ loop.index }}">
+                                    <div class="row">
+                                        <div class="desc col-sm-6">
+                                            <p>{{ subreddit['desc'] }}</p>
+                                        </div>
+                                        <div class="reddit-widget col-sm-6">
+                                            <h6>
+                                                <u>Recent Posts</u>
+                                            </h6>
+                                            <script src="https://www.reddit.com/{{ subreddit['name'] }}.embed?limit=2" type="text/javascript"></script>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="reddit-widget col-sm-6">
-                                    <h6>
-                                        <u>Recent Posts</u>
-                                    </h6>
-                                    <script src="https://www.reddit.com/{{ subreddit['name'] }}.embed?limit=2" type="text/javascript"></script>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</body>
-
-
-
-<!--     <script>
+    <script>
         function searchSubs() {
             // Declare variables
             var input, filter, tbody, tr, td, i;
@@ -128,6 +81,5 @@
             search.value = "";
             searchSubs();
         }
-    </script> -->
+    </script>
 {% endblock %}
-
