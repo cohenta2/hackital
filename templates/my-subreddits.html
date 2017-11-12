@@ -1,5 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<!--     <style>
+<head>
+    <title>Subreddit Rating</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'javascript.js') }}"></script>
+    <style>
         .hiddenRow {
             padding-top: 0 !important;
             padding-bottom: 0 !important;
@@ -18,7 +37,9 @@
             padding-top: 5px;
             padding-bottom: 5px;
         }
-    </style> -->
+    </style>
+</head>
+
 <body id="root" class="bg-light">
     <nav class="navbar navbar-dark bg-primary justify-content-between">
         <a id="title" class="navbar-brand text-white" onclick="clearSearch()">Subreddit Ratings</a>
@@ -26,20 +47,14 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search by Name" aria-label="Search" id="search" onkeyup="searchSubs()">
         </form>
     </nav>
-  
-{% extends "base.html" %}
-  {% block title %} Map {% endblock %}
-  {% block head %}
-    {{ super() }}
-  {% endblock %}
-  {%block content %}
+
     <div class="container main">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active bg-primary" href="{{ url_for('index') }}">Top 100</a>
+                <a class="nav-link" href="{{ url_for('index') }}">Top 100</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('mySubReddits') }}">My Subreddits</a>
+                <a class="nav-link active bg-primary" href="{{ url_for('mySubReddits') }}">My Subreddits</a>
             </li>
         </ul>
         <table class="table" style="border-collapse:collapse; height: 100px;" id="main-table">
@@ -100,34 +115,4 @@
     </div>
 </body>
 
-
-
-<!--     <script>
-        function searchSubs() {
-            // Declare variables
-            var input, filter, tbody, tr, td, i;
-            input = document.getElementById("search");
-            filter = input.value.toUpperCase();
-            tbody = document.getElementById("table-body");
-            tr = tbody.getElementsByTagName("tr");
-            // Loop through all table rows, and hide those who don't match the search query
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("a")[0];
-                if (td) {
-                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-
-        function clearSearch() {
-            var search = document.getElementById("search");
-            search.value = "";
-            searchSubs();
-        }
-    </script> -->
-{% endblock %}
-
+</html>
