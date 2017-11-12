@@ -1,56 +1,14 @@
-
-<!--     <style>
-        .hiddenRow {
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-        }
-
-        .main {
-            padding-top: 10px;
-        }
-
-        table {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        }
-
-        .reddit-widget,
-        .desc {
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
-    </style> -->
-<body id="root" class="bg-light">
-    <nav class="navbar navbar-dark bg-primary justify-content-between">
-        <a id="title" class="navbar-brand text-white" onclick="clearSearch()">Subreddit Ratings</a>
-        <form class="form-inline" onsubmit="return false">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search by Name" aria-label="Search" id="search" onkeyup="searchSubs()">
-        </form>
-    </nav>
-  
-{% extends "base.html" %}
-  {% block title %} Map {% endblock %}
-  {% block head %}
-    {{ super() }}
-  {% endblock %}
-  {%block content %}
+    {% extends "base.html" %} {% set title="Subreddit Ratings" %} {% block head %} {{ super() }} {% endblock %} {% block content %}
     <div class="container main">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active bg-primary" href="{{ url_for('index') }}">Top 100</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('mySubReddits') }}">My Subreddits</a>
-            </li>
-        </ul>
-        <table class="table" style="border-collapse:collapse; height: 100px;" id="main-table">
-            <thead class="text-white">
+        <table class="table border-0" style="border-collapse:collapse; height: 100px;" id="main-table">
+            <thead class="text-white border-0">
                 <tr class="bg-primary">
-                    <th scope="col">#</th>
+                    <th scope="col"><a href="#" onclick="sortNum(0)" class="text-white">#</a></th>
                     <th></th>
                     <th scope="col">
-                        Subreddit
+                        <a href="#" onclick="sortSubreddits()" class="text-white">Subreddit</a>
                     </th>
-                    <th scope="col">Subscribers</th>
+                    <th scope="col"><a href="#" onclick="sortNum(3)" class="text-white">Subscribers</a></th>
                     <th scope="col">Rating</th>
                 </tr>
             </thead>
@@ -98,36 +56,4 @@
             </tbody>
         </table>
     </div>
-</body>
-
-
-
-<!--     <script>
-        function searchSubs() {
-            // Declare variables
-            var input, filter, tbody, tr, td, i;
-            input = document.getElementById("search");
-            filter = input.value.toUpperCase();
-            tbody = document.getElementById("table-body");
-            tr = tbody.getElementsByTagName("tr");
-            // Loop through all table rows, and hide those who don't match the search query
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("a")[0];
-                if (td) {
-                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-
-        function clearSearch() {
-            var search = document.getElementById("search");
-            search.value = "";
-            searchSubs();
-        }
-    </script> -->
 {% endblock %}
-

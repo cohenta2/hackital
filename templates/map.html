@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-  {% block title %} Map {% endblock %}
+  {% set title="Map" %}
   {% block head %}
-    <link rel="stylesheet" href={{ url_for('static',filename='styles/hexagon.min.css') }}>>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/hexagon.min.css') }}">
     {{ super() }}
   {% endblock %}
   {%block content %}

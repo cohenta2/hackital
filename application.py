@@ -17,22 +17,18 @@ for x in subreddits_json['data']['children']:
     top100_subreddits.append(subreddit)
     
 application = Flask(__name__)
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 
 @application.route('/')
 def index():
-    return render_template('index.html', subreddits = top100_subreddits)
+    return render_template('index.html', subreddits = top100_subreddits, active="index")
 
-@app.route('/my-subreddits/')
+@application.route('/my-subreddits/')
 def mySubReddits():
-    return render_template('my-subreddits.html', subreddits = top100_subreddits)
+    return render_template('my-subreddits.html', subreddits = top100_subreddits, active_table="mysubs")
 
-if __name__ == '__main__':
-
-   application.run(debug = True)
-
-@app.route('/map')
+@application.route('/map/')
 def build_map():
     columns = np.arange(10)
     result = collections.defaultdict(list)
@@ -40,5 +36,11 @@ def build_map():
         result[d['name']].append(d)
 
     result_list = result.values()
-    return render_template('map.html', columns = columns, subreddits = result_list, random="test")
+    return render_template('map.html', columns = columns, subreddits = result_list, random="test", active="map")
+
+if __name__ == '__main__':
+
+   application.run(debug = True)
+
+
 
