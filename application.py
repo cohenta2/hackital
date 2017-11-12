@@ -31,11 +31,4 @@ def mySubReddits():
 
 @application.route('/map')
 def map():
-    columns = np.arange(10)
-    result = collections.defaultdict(list)
-
-    for d in top100_subreddits:
-        result[d['name']].append(d)
-
-    result_list = result.values()
-    return render_template('map.html',columns=columns, subreddits = top100_subreddits, random="test")
+    return render_template('map.html',data = json.dumps(top100_subreddits), random="test")
