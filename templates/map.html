@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+  {% block title %} Map {% endblock %}
+  {% block head %}
+    <link rel="stylesheet" href={{ url_for('static',filename='styles/hexagon.min.css') }}>>
+    {{ super() }}
+  {% endblock %}
+  {%block content %}
+    <div class="container main">
+        <div class="row">
+            <div class="col-sm-12">
+              {% for column in columns %}
+              <div class="row">
+                {% for subreddit in subreddits %}
+                  <div class="hexagon"></div>
+                {% endfor %}
+              </div>
+              {% endfor %}
+              </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+    </script>
+{% endblock %}
