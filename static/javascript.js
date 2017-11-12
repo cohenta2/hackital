@@ -28,14 +28,14 @@ function clearSearch() {
         collapsables[i].collapse('hide');
     }
 }
-<<<<<<< HEAD
+
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     var test = [];
     table = document.getElementById("main-table");
     switching = true;
     // Set the sorting direction to ascending:
-    dir = "asc"; 
+    dir = "asc";
     /* Make a loop that will continue until
     no switching has been done: */
     while (switching) {
@@ -75,7 +75,7 @@ function sortTable(n) {
         rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
         switching = true;
         // Each time a switch is done, increase this count by 1:
-        switchcount ++; 
+        switchcount ++;
       } else {
         /* If no switching has been done AND the direction is "asc",
         set the direction to "desc" and run the while loop again. */
@@ -86,7 +86,7 @@ function sortTable(n) {
       }
     }
     alert(test);
-    
+
   }
   function sortNum(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -94,7 +94,7 @@ function sortTable(n) {
     table = document.getElementById("main-table");
     switching = true;
     // Set the sorting direction to ascending:
-    dir = "asc"; 
+    dir = "asc";
     /* Make a loop that will continue until
     no switching has been done: */
     while (switching) {
@@ -111,7 +111,7 @@ function sortTable(n) {
         x = rows[i].getElementsByTagName("td")[n];
         y = rows[i + 2].getElementsByTagName("td")[n];
         /* Check if the two rows should switch place,
-        based on the direction, asc or desc: */  
+        based on the direction, asc or desc: */
         if (dir == "asc") {
           if (Number(x.innerHTML) > Number(y.innerHTML)) {
             // If so, mark as a switch and break the loop:
@@ -126,7 +126,7 @@ function sortTable(n) {
           }
         }
         //console.log("Switching: " + shouldSwitch + " List: " + [x.innerHTML, y.innerHTML]);
-      } 
+      }
       if (shouldSwitch) {
         /* If a switch has been marked, make the switch
         and mark that a switch has been done: */
@@ -134,7 +134,7 @@ function sortTable(n) {
         rows[i].parentNode.insertBefore(rows[i + 3], rows[i+1]);
         switching = true;
         // Each time a switch is done, increase this count by 1:
-        switchcount ++; 
+        switchcount ++;
       } else {
         /* If no switching has been done AND the direction is "asc",
         set the direction to "desc" and run the while loop again. */
@@ -142,8 +142,8 @@ function sortTable(n) {
           dir = "desc";
           switching = true;
         }
-      } 
-    }    
+      }
+    }
   }
   function sortSubreddits() {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -151,7 +151,7 @@ function sortTable(n) {
     table = document.getElementById("main-table");
     switching = true;
     // Set the sorting direction to ascending:
-    dir = "asc"; 
+    dir = "asc";
     /* Make a loop that will continue until
     no switching has been done: */
     while (switching) {
@@ -168,7 +168,7 @@ function sortTable(n) {
         x = rows[i].getElementsByTagName("td")[2];
         y = rows[i + 2].getElementsByTagName("td")[2];
         /* Check if the two rows should switch place,
-        based on the direction, asc or desc: */  
+        based on the direction, asc or desc: */
         if (dir == "asc") {
           if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
             // If so, mark as a switch and break the loop:
@@ -183,7 +183,7 @@ function sortTable(n) {
           }
         }
         //console.log("Switching: " + shouldSwitch + " List: " + [x.innerHTML, y.innerHTML]);
-      } 
+      }
       if (shouldSwitch) {
         /* If a switch has been marked, make the switch
         and mark that a switch has been done: */
@@ -191,7 +191,7 @@ function sortTable(n) {
         rows[i].parentNode.insertBefore(rows[i + 3], rows[i+1]);
         switching = true;
         // Each time a switch is done, increase this count by 1:
-        switchcount ++; 
+        switchcount ++;
       } else {
         /* If no switching has been done AND the direction is "asc",
         set the direction to "desc" and run the while loop again. */
@@ -199,6 +199,6 @@ function sortTable(n) {
           dir = "desc";
           switching = true;
         }
-      } 
-    }    
+      }
+    }
   }

@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from urllib import request
 import collections
-import numpy as np
 import json
 
 response = request.urlopen("https://api.reddit.com/subreddits/popular/?limit=100")
