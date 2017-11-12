@@ -1,13 +1,16 @@
 from flask import Flask, render_template
 from urllib import request
+import boto3
 import collections
-import numpy as np
 import json
 import random
+
+# dynamodb = boto3.resource('dynamodb')
 
 response = request.urlopen("https://api.reddit.com/subreddits/popular/?limit=100")
 subreddits_json = json.loads(response.read().decode())
 top100_subreddits= []
+
 for x in subreddits_json['data']['children']:
     keys = x['data']
     subreddit = {}

@@ -31,14 +31,11 @@ function mover(d) {
 		.transition()
 		.duration(10)
 		.style("fill-opacity", 0.3);
-    console.log(el);
-    console.log(d);
-    // console.log(el[0][0].__data__.x.toString()+", "+el[0][0].__data__.y.toString());
-    // var x = el[0][0].__data__.x.toString();
-    // var y = el[0][0].__data__.y.toString();
-    // coordinates = x + ',' + y;
+    var coordinates = el[0][0].__data__.toString();
+    sub = graph_dict.get(coordinates);
+    $("#name").text(sub['name']);
+    $("#score").text(sub['subs'])
     // console.log(graph_dict.get(coordinates));
-    // console.log(graph_dict);
 }
 
 //Mouseout function
