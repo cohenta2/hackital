@@ -9,13 +9,12 @@
                         <a href="#" onclick="sortSubreddits()" class="text-white">Subreddit</a>
                     </th>
                     <th scope="col"><a href="#" onclick="sortNum(3)" class="text-white">Subscribers</a></th>
-                    <th scope="col">Rating</th>
+                    <th scope="col"><a href="#" onclick="sortRating()" class="text-white">Rating</a></th>
                 </tr>
             </thead>
             <tbody id="table-body">
                 {% for subreddit in subreddits %}
-                <tr id="{{ subreddit['name'] }}" data-toggle="collapse" data-target="#demo{{ loop.index }}" class="accordion-toggle align-middle"
-                    onclick="makeShadow()">
+                <tr id="{{ subreddit['name'] }}" data-toggle="collapse" data-target="#demo{{ loop.index }}" class="accordion-toggle align-middle main{{ loop.index }}">
                     <td scope="row" class="col-xs-3">{{ loop.index }}</td>
                     <td>
                         <img src="{{ subreddit['img'] }}" class="rounded-circle" height="50">
@@ -24,15 +23,13 @@
                         <a href="https://www.reddit.com/{{ subreddit['name'] }}">{{ subreddit['name'] }}</a>
                     </td>
                     <td>{{ subreddit['subs'] }}</td>
-                    <td>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
+                    <td id="{{ subreddit.rating }}">
+                        {% for rating in range(subreddit.rating_trun) %}
+                            <i class="material-icons" style="color: red;">report</i>
+                        {% endfor %}
                     </td>
                 </tr>
-                <tr id="{{ subreddit['name'] }}-secondary" class="border-0">
+                <tr id="{{ subreddit['name'] }}-secondary" class="border-0 secondary{{ loop.index }}">
                     <td colspan="5" class="hiddenRow">
                         <div class="accordian-body collapse container alert-secondary rounded-bottom border border-secondary border-top-0" id="demo{{ loop.index }}">
                             <div class="row">
@@ -41,6 +38,10 @@
                                         <u>Description</u>
                                     </h6>
                                     <p>{{ subreddit['desc'] }}</p>
+                                    <h6>
+                                            <u>Rating</u>
+                                        </h6>
+                                        <p>{{ subreddit['rating'] }}</p>
                                 </div>
                                 <div class="reddit-widget col-sm-6">
                                     <h6>
