@@ -13,20 +13,12 @@ for x in subreddits_json['data']['children']:
     subreddit['name'] = keys['display_name_prefixed']
     subreddit['subs'] = keys['subscribers']
     subreddit['desc'] = keys['public_description']
-    subreddit['img'] = keys['icon_img']
     top100_subreddits.append(subreddit)
-    
 application = Flask(__name__)
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-
 
 @application.route('/')
 def index():
-    return render_template('index.html', subreddits = top100_subreddits)
-
-@app.route('/my-subreddits/')
-def mySubReddits():
-    return render_template('my-subreddits.html', subreddits = top100_subreddits)
+    return render_template('index.html', subreddits = top100_subreddits, random="test")
 
 if __name__ == '__main__':
 
