@@ -9,7 +9,7 @@
                         <a href="#" onclick="sortSubreddits()" class="text-white">Subreddit</a>
                     </th>
                     <th scope="col"><a href="#" onclick="sortNum(3)" class="text-white">Subscribers</a></th>
-                    <th scope="col">Rating</th>
+                    <th scope="col"><a href="#" onclick="sortRating()" class="text-white">Rating</a></th>
                 </tr>
             </thead>
             <tbody id="table-body">
@@ -23,12 +23,10 @@
                         <a href="https://www.reddit.com/{{ subreddit['name'] }}">{{ subreddit['name'] }}</a>
                     </td>
                     <td>{{ subreddit['subs'] }}</td>
-                    <td>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
-                        <i class="material-icons">grade</i>
+                    <td id="{{ subreddit.rating }}">
+                        {% for rating in range(subreddit.rating_trun) %}
+                            <i class="material-icons" style="color: red;">report</i>
+                        {% endfor %}
                     </td>
                 </tr>
                 <tr id="{{ subreddit['name'] }}-secondary" class="border-0 secondary{{ loop.index }}">
@@ -40,6 +38,10 @@
                                         <u>Description</u>
                                     </h6>
                                     <p>{{ subreddit['desc'] }}</p>
+                                    <h6>
+                                            <u>Rating</u>
+                                        </h6>
+                                        <p>{{ subreddit['rating'] }}</p>
                                 </div>
                                 <div class="reddit-widget col-sm-6">
                                     <h6>
